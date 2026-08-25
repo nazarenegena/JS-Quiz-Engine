@@ -1,0 +1,13 @@
+{
+  "name": "js-quiz-engine",
+  "version": "0.1.0",
+  "description": "A quiz engine built with pure JavaScript",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.2.2"
+  }
+}
