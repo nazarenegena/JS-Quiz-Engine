@@ -4,8 +4,34 @@ import { questions } from "./questions.js";
 const quizBox = document.getElementsByClassName("all-questions");
 const firstQuestion = quizBox[0];
 let currentQuestionIndex = 0;
+const answerContainer = document.querySelector(".answer-container")
 const scoreDisplay = document.getElementById("score");
+const wrongAns = document.createElement('div')
+ const wrongAnsText = document.createElement('p')
+const nextButton = document.createElement('button');
+const restartButton = document.createElement('button');
+nextButton.addEventListener('click', handleNextButtonClick);
+restartButton.addEventListener('click', handleRestartButtonClick);
 let scoreCount = 0;
+let isAdded = false;
+
+function handleNextButtonClick() {
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex ++
+    displayQuestion()
+  }
+  else {
+    alert("You've reached the end of the quiz!")
+  }
+}
+function handleRestartButtonClick() {
+  currentQuestionIndex = 0;
+  scoreCount = 0;
+  scoreDisplay.textContent = "";
+  wrongAns.innerHTML=""
+  firstQuestion.innerHTML = "";
+  displayQuestion();
+}
 
 
 function displayQuestion() {
@@ -24,27 +50,35 @@ function displayQuestion() {
       btn.addEventListener("click", handleChoiceClick)
       choicesDiv.appendChild(btn)
     })
+  function handleChoiceClick(e) {
+    if (question.answer === e.target.textContent) {
 
-    function handleChoiceClick(e) {
-      if (question.answer === e.target.textContent) {
-        scoreCount += 1;
-        const nextButton = document.createElement('button');
-        function handleNextButtonClick() {
-          if (currentQuestionIndex < questions.length - 1) {
-            currentQuestionIndex ++
-            displayQuestion()
+       if (question.answer === e.target.textContent) {
+          if (!isAdded) {
+            scoreCount += 1;
+            isAdded = true;
+
           }
-          else {
-            alert("You've reached the end of the quiz!")
-          }
+         wrongAnsText.textContent = ""
+          scoreDisplay.textContent = `Great job! Your score is ${scoreCount}`;
+
         }
-        nextButton.addEventListener('click', handleNextButtonClick)
 
-        scoreDisplay.textContent = `Your score is ${scoreCount}`;
-         nextButton.textContent = "Next Question"
-        questionDiv.appendChild(nextButton)
-      } else {
-        alert("Wrong!")
+        nextButton.textContent = "Next Question"
+        restartButton.addEventListener(("click"), handleRestartButtonClick)
+        restartButton.textContent = "Restart Quiz"
+ scoreDisplay.textContent = `Great job! Your score is ${scoreCount}`;
+        answerContainer.appendChild(scoreDisplay)
+        answerContainer.appendChild(nextButton)
+        answerContainer.appendChild(restartButton)
+
+      }
+
+      else {
+
+        wrongAnsText.textContent = "Wrong Answer, Try again"
+        scoreDisplay.textContent = "";
+        wrongAns.appendChild(wrongAnsText)
       }
       console.log(scoreCount)
     }
@@ -57,7 +91,8 @@ function displayQuestion() {
     questionDiv.appendChild(questionCategory);
     questionDiv.appendChild(questionDifficulty);
     questionDiv.appendChild(questionText);
-    questionDiv.appendChild(choicesDiv);
+  questionDiv.appendChild(choicesDiv);
+  questionDiv.appendChild(wrongAns)
 }
 
   displayQuestion()
