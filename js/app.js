@@ -1,6 +1,5 @@
 import { questions } from "./questions.js";
 
-
 const quizBox = document.getElementsByClassName("all-questions");
 const firstQuestion = quizBox[0];
 let currentQuestionIndex = 0;
@@ -13,7 +12,7 @@ const restartButton = document.createElement('button');
 nextButton.addEventListener('click', handleNextButtonClick);
 restartButton.addEventListener('click', handleRestartButtonClick);
 let scoreCount = 0;
-let isAdded = false;
+
 
 function handleNextButtonClick() {
   if (currentQuestionIndex < questions.length - 1) {
@@ -52,12 +51,10 @@ function displayQuestion() {
     })
   function handleChoiceClick(e) {
     if (question.answer === e.target.textContent) {
-
-       if (question.answer === e.target.textContent) {
-          if (!isAdded) {
+      if (question.answer === e.target.textContent) {
+          if (!question.isAnswered) {
             scoreCount += 1;
-            isAdded = true;
-
+        question.isAnswered=true
           }
          wrongAnsText.textContent = ""
           scoreDisplay.textContent = `Great job! Your score is ${scoreCount}`;
