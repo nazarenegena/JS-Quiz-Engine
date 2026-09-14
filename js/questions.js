@@ -26,166 +26,166 @@ export const questions = [
     answer: "Oxygen",
      isAnswered:false
   },
-  {
-    id: 4,
-    category: "Science & Nature",
-    difficulty: "easy",
-    question: "Which animal is known as the king of the jungle?",
-    options: ["Tiger", "Elephant", "Gorilla", "Lion"],
-    answer: "Lion",
-     isAnswered:false
-  },
-  {
-    id: 5,
-    category: "Geography",
-    difficulty: "easy",
-    question: "What is the largest ocean on Earth?",
-    options: ["Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"],
-    answer: "Pacific Ocean",
-     isAnswered:false
-  },
-  {
-    id: 6,
-    category: "Geography",
-    difficulty: "easy",
-    question: "Which country is home to the Great Pyramid of Giza?",
-    options: ["Mexico", "Sudan", "Egypt", "Iraq"],
-    answer: "Egypt",
-     isAnswered:false
-  },
-  {
-    id: 7,
-    category: "Geography",
-    difficulty: "easy",
-    question: "What is the capital city of France?",
-    options: ["Lyon", "Paris", "Berlin", "Madrid"],
-    answer: "Paris",
-     isAnswered:false
-  },
-  {
-    id: 8,
-    category: "Geography",
-    difficulty: "easy",
-    question: "How many continents are there on Earth?",
-    options: ["Five", "Six", "Seven", "Eight"],
-    answer: "Seven",
-     isAnswered:false
-  },
-  {
-    id: 9,
-    category: "Pop Culture & Fun",
-    difficulty: "easy",
-    question: "Which popular sandbox video game lets players build with blocks?",
-    options: ["Roblox", "Fortnite", "Terraria", "Minecraft"],
-    answer: "Minecraft",
-     isAnswered:false
-  },
-  {
-    id: 10,
-    category: "Pop Culture & Fun",
-    difficulty: "medium",
-    question: "What color is a standard tennis ball?",
-    options: ["White", "Red", "Blue", "Yellow-green"],
-    answer: "Yellow-green",
-     isAnswered:false
-  },
-  {
-    id: 11,
-    category: "Pop Culture & Fun",
-    difficulty: "easy",
-    question: "Which Disney movie features a princess named Elsa?",
-    options: ["Moana", "Frozen", "Tangled", "Brave"],
-    answer: "Frozen",
-     isAnswered:false
-  },
-  {
-    id: 12,
-    category: "Pop Culture & Fun",
-    difficulty: "easy",
-    question: "How many players are on a standard soccer team on the field?",
-    options: ["Nine", "Ten", "Twelve", "Eleven"],
-    answer: "Eleven",
-     isAnswered:false
-  },
-  {
-    id: 13,
-    category: "Math & Logic",
-    difficulty: "easy",
-    question: "What is 9 plus 10?",
-    options: ["18", "19", "20", "21"],
-    answer: "19",
-     isAnswered:false
-  },
-  {
-    id: 14,
-    category: "Math & Logic",
-    difficulty: "easy",
-    question: "How many sides does a triangle have?",
-    options: ["Two", "Three", "Four", "Five"],
-    answer: "Three",
-     isAnswered:false
-  },
-  {
-    id: 15,
-    category: "Math & Logic",
-    difficulty: "medium",
-    question: "What is the square root of 64?",
-    options: ["Six", "Seven", "Eight", "Nine"],
-    answer: "Eight",
-     isAnswered:false
-  },
-  {
-    id: 16,
-    category: "Math & Logic",
-    difficulty: "medium",
-    question: "Which number comes next in the pattern: 2, 4, 6, 8, ...?",
-    options: ["9", "11", "12", "10"],
-    answer: "10",
-     isAnswered:false
-  },
-  {
-    id: 17,
-    category: "Science & Nature",
-    difficulty: "easy",
-    question: "Which planet is known as the Red Planet?",
-    options: ["Earth", "Mars", "Jupiter", "Saturn"],
-    answer: "Mars",
-     isAnswered:false
-  },
-  {
-    id: 18,
-    category: "Science & Nature",
-    difficulty: "hard",
-    question: "How many bones are in the adult human body?",
-    options: ["196", "206", "216", "226"],
-    answer: "206",
-     isAnswered:false
-  },
-  {
-    id: 19,
-    category: "Geography",
-    difficulty: "hard",
-    question: "What is the smallest country in the world by area?",
-    options: ["Monaco", "Nauru", "Vatican City", "San Marino"],
-    answer: "Vatican City",
-     isAnswered:false
-  },
-  {
-    id: 20,
-    category: "Pop Culture & Fun",
-    difficulty: "hard",
-    question: "What is Superman's home planet called?",
-    options: ["Krypton", "Vulcan", "Asgard", "Tatooine"],
-    answer: "Krypton",
-     isAnswered:false
-  },
-  {
-    id: 21,
-    category: "Math & Logic",
-    difficulty: "hard",
-    question: "Which number comes next in the sequence: 1, 1, 2, 3, 5, 8, ...?",
-    options: ["11", "12", "13", "14"],
-    answer: "13",
-    isAnswered:false
-  },
+  // {
+  //   id: 4,
+  //   category: "Science & Nature",
+  //   difficulty: "easy",
+  //   question: "Which animal is known as the king of the jungle?",
+  //   options: ["Tiger", "Elephant", "Gorilla", "Lion"],
+  //   answer: "Lion",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 5,
+  //   category: "Geography",
+  //   difficulty: "easy",
+  //   question: "What is the largest ocean on Earth?",
+  //   options: ["Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"],
+  //   answer: "Pacific Ocean",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 6,
+  //   category: "Geography",
+  //   difficulty: "easy",
+  //   question: "Which country is home to the Great Pyramid of Giza?",
+  //   options: ["Mexico", "Sudan", "Egypt", "Iraq"],
+  //   answer: "Egypt",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 7,
+  //   category: "Geography",
+  //   difficulty: "easy",
+  //   question: "What is the capital city of France?",
+  //   options: ["Lyon", "Paris", "Berlin", "Madrid"],
+  //   answer: "Paris",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 8,
+  //   category: "Geography",
+  //   difficulty: "easy",
+  //   question: "How many continents are there on Earth?",
+  //   options: ["Five", "Six", "Seven", "Eight"],
+  //   answer: "Seven",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 9,
+  //   category: "Pop Culture & Fun",
+  //   difficulty: "easy",
+  //   question: "Which popular sandbox video game lets players build with blocks?",
+  //   options: ["Roblox", "Fortnite", "Terraria", "Minecraft"],
+  //   answer: "Minecraft",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 10,
+  //   category: "Pop Culture & Fun",
+  //   difficulty: "medium",
+  //   question: "What color is a standard tennis ball?",
+  //   options: ["White", "Red", "Blue", "Yellow-green"],
+  //   answer: "Yellow-green",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 11,
+  //   category: "Pop Culture & Fun",
+  //   difficulty: "easy",
+  //   question: "Which Disney movie features a princess named Elsa?",
+  //   options: ["Moana", "Frozen", "Tangled", "Brave"],
+  //   answer: "Frozen",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 12,
+  //   category: "Pop Culture & Fun",
+  //   difficulty: "easy",
+  //   question: "How many players are on a standard soccer team on the field?",
+  //   options: ["Nine", "Ten", "Twelve", "Eleven"],
+  //   answer: "Eleven",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 13,
+  //   category: "Math & Logic",
+  //   difficulty: "easy",
+  //   question: "What is 9 plus 10?",
+  //   options: ["18", "19", "20", "21"],
+  //   answer: "19",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 14,
+  //   category: "Math & Logic",
+  //   difficulty: "easy",
+  //   question: "How many sides does a triangle have?",
+  //   options: ["Two", "Three", "Four", "Five"],
+  //   answer: "Three",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 15,
+  //   category: "Math & Logic",
+  //   difficulty: "medium",
+  //   question: "What is the square root of 64?",
+  //   options: ["Six", "Seven", "Eight", "Nine"],
+  //   answer: "Eight",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 16,
+  //   category: "Math & Logic",
+  //   difficulty: "medium",
+  //   question: "Which number comes next in the pattern: 2, 4, 6, 8, ...?",
+  //   options: ["9", "11", "12", "10"],
+  //   answer: "10",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 17,
+  //   category: "Science & Nature",
+  //   difficulty: "easy",
+  //   question: "Which planet is known as the Red Planet?",
+  //   options: ["Earth", "Mars", "Jupiter", "Saturn"],
+  //   answer: "Mars",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 18,
+  //   category: "Science & Nature",
+  //   difficulty: "hard",
+  //   question: "How many bones are in the adult human body?",
+  //   options: ["196", "206", "216", "226"],
+  //   answer: "206",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 19,
+  //   category: "Geography",
+  //   difficulty: "hard",
+  //   question: "What is the smallest country in the world by area?",
+  //   options: ["Monaco", "Nauru", "Vatican City", "San Marino"],
+  //   answer: "Vatican City",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 20,
+  //   category: "Pop Culture & Fun",
+  //   difficulty: "hard",
+  //   question: "What is Superman's home planet called?",
+  //   options: ["Krypton", "Vulcan", "Asgard", "Tatooine"],
+  //   answer: "Krypton",
+  //    isAnswered:false
+  // },
+  // {
+  //   id: 21,
+  //   category: "Math & Logic",
+  //   difficulty: "hard",
+  //   question: "Which number comes next in the sequence: 1, 1, 2, 3, 5, 8, ...?",
+  //   options: ["11", "12", "13", "14"],
+  //   answer: "13",
+  //   isAnswered:false
+  // },
 ];
