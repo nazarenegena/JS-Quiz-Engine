@@ -1,6 +1,5 @@
-
-const correctAnswers = []
-const wrongAnswers = []
+const correctAnswers = [];
+const wrongAnswers = [];
 
 export function displayQuestion(questions, quizBox, quizState, nextButton) {
   quizBox.innerHTML = "";
@@ -11,7 +10,6 @@ export function displayQuestion(questions, quizBox, quizState, nextButton) {
   const questionText = document.createElement("p");
   const choicesDiv = document.createElement("div");
   choicesDiv.className = "choices";
-
 
   question?.options.forEach((option) => {
     const btn = document.createElement("button");
@@ -28,9 +26,11 @@ export function displayQuestion(questions, quizBox, quizState, nextButton) {
         quizState.scoreCount += 1;
         question.isAnswered = true;
       }
-      correctAnswers.push(question)
+      question.selectedAns = e.target.textContent
+      correctAnswers.push(question);
     } else {
-      wrongAnswers.push(question)
+      question.selectedAns = e.target.textContent
+      wrongAnswers.push(question);
     }
     nextButton.style.display = "block";
   }
@@ -67,13 +67,19 @@ export function handleNextButtonClick(
       endQuizParagraph.textContent =
         "Yeey you have reached the end of Quizie Engine";
 
-// display right questions
-const correctAnswersBtn = document.createElement('button');
+      // display right questions
+      const correctAnswersBtn = document.createElement("button");
       correctAnswersBtn.textContent = "Correct Answers";
       correctAnswersBtn.addEventListener("click", () => {
-  handleDisplayCorrectAnswers(quizBox)
-})
+        handleDisplayCorrectAnswers(quizBox);
+      }, {once:true});
 
+      // display right questions
+      const wrongAnswersBtn = document.createElement("button");
+      wrongAnswersBtn.textContent = "Wrong Answers";
+      wrongAnswersBtn.addEventListener("click", () => {
+        handleDisplayWrongAnswers(quizBox);
+      }, {once:true});
 
       // restart Button
       const restartButton = document.createElement("button");
@@ -90,14 +96,14 @@ const correctAnswersBtn = document.createElement('button');
       });
       endOfQuiz.appendChild(endQuizParagraph);
       endOfQuiz.appendChild(restartButton);
-      endOfQuiz.appendChild(correctAnswersBtn)
+      endOfQuiz.appendChild(correctAnswersBtn);
+      endOfQuiz.appendChild(wrongAnswersBtn);
       nextButton.style.display = "none";
     }
   } catch (err) {
     console.log(err);
   }
 }
-
 
 function handleRestartButtonClick(
   questions,
@@ -115,20 +121,36 @@ function handleRestartButtonClick(
     quizState.isQuizOver = false;
     questionItem.isAnswered = false;
     scoreDisplay.textContent = "";
-
     nextButton.style.display = "none";
   });
   displayQuestion(questions, quizBox, quizState, nextButton);
 }
 
-
 function handleDisplayCorrectAnswers(quizBox) {
+  const correctAnsTittle = document.createElement("h5");
+  correctAnsTittle.textContent = "Answers you got right"
+  quizBox.appendChild(correctAnsTittle)
   correctAnswers.forEach((correctAnswer) => {
-    const correctAnsDiv = document.createElement("div")
-    const correctAnswQuiz = document.createElement("p");
-    correctAnsDiv.setAttribute("id", correctAnswer.id)
-    correctAnswQuiz.textContent = correctAnswer.question
-    correctAnsDiv.appendChild(correctAnswQuiz)
-    quizBox.appendChild(correctAnsDiv)
-  })
+    const correctAnsDiv = document.createElement("div");
+    const correctAnsQuiz = document.createElement("p");
+    correctAnsDiv.setAttribute("id", correctAnswer.id);
+    correctAnsQuiz.textContent = correctAnswer.question;
+    correctAnsDiv.appendChild(correctAnsQuiz);
+    quizBox.appendChild(correctAnsDiv);
+  });
+}
+
+function handleDisplayWrongAnswers(quizBox) {
+  const wrongAnsTittle = document.createElement("h5");
+  wrongAnsTittle.textContent = "Answers you got wrong"
+  quizBox.appendChild(wrongAnsTittle)
+  wrongAnswers.forEach((wrongAnswer) => {
+    console.log(wrongAnswer, "checking the wrong ans")
+    const wrongAnsDiv = document.createElement("div");
+    const wrongAnsQuiz = document.createElement("p");
+    wrongAnsDiv.setAttribute("id", wrongAnswer.id);
+    wrongAnsQuiz.textContent = wrongAnswer.question;
+    wrongAnsDiv.appendChild(wrongAnsQuiz);
+    quizBox.appendChild(wrongAnsDiv);
+  });
 }
