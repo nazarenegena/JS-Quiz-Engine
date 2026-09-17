@@ -6,7 +6,8 @@ export const questions = [
     question: "What is the center of our solar system?",
     options: ["Sun", "Moon", "Mars", "Jupiter"],
     answer: "Sun",
-    isAnswered:false
+    isAnswered: false,
+    selectedAns: ""
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ export const questions = [
     question: "How many legs does a spider have?",
     options: ["Six", "Eight", "Ten", "Twelve"],
     answer: "Eight",
-     isAnswered:false
+    isAnswered: false,
+     selectedAns: ""
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ export const questions = [
     question: "What gas do humans need to breathe to live?",
     options: ["Carbon dioxide", "Nitrogen", "Oxygen", "Helium"],
     answer: "Oxygen",
-     isAnswered:false
+    isAnswered: false,
+     selectedAns: ""
   },
   // {
   //   id: 4,
