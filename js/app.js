@@ -1,4 +1,4 @@
-import { displayQuestion, handleNextButtonClick } from "../utils.js";
+import { displayQuestion, handleNextButtonClick, updateProgress } from "../utils.js";
 import { questions } from "./questions.js";
 
 // The DOM Elements
@@ -21,3 +21,4 @@ nextButton.addEventListener('click', ()=> {handleNextButtonClick(quizState, ques
 nextButton.style.display = "none"
 answerContainer.appendChild(nextButton)
 displayQuestion(questions, quizBox, quizState, nextButton)
+updateProgress(quizState, questions);

@@ -57,6 +57,7 @@ export function handleNextButtonClick(
     if (quizState.currentQuestionIndex < questions.length - 1) {
       quizState.currentQuestionIndex++;
       displayQuestion(questions, quizBox, quizState, nextButton);
+      updateProgress(quizState, questions);
       nextButton.style.display = "none";
     } else {
       quizState.isQuizOver = true;
@@ -124,6 +125,7 @@ function handleRestartButtonClick(
     nextButton.style.display = "none";
   });
   displayQuestion(questions, quizBox, quizState, nextButton);
+  updateProgress(quizState, questions);
 }
 
 function handleDisplayCorrectAnswers(quizBox) {
@@ -153,4 +155,15 @@ function handleDisplayWrongAnswers(quizBox) {
     wrongAnsDiv.appendChild(wrongAnsQuiz);
     quizBox.appendChild(wrongAnsDiv);
   });
+}
+
+
+export function updateProgress(quizState, questions) {
+  const current = quizState.currentQuestionIndex + 1;
+  const total = questions.length;
+  const percent = (current / total) * 100;
+  const fill = document.getElementById("progress-fill");
+  const text = document.getElementById("quizProgressText");
+  if (fill) fill.style.width = percent + "%";
+  if (text) text.textContent = String(current).padStart(2, "0") + " / " + total;  // "01 / 21"
 }
