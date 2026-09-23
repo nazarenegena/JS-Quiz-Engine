@@ -1,17 +1,21 @@
 #main {
     background-color: #FBFAFC;
-    height: 100dvh
+    height: 100dvh;
+    padding: 2rem 10rem;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
 }
 .navbar {
-margin-top:20;
+    display: flex;
+    justify-content: space-between;
 }
-#progress-wrapper {
+.progress-wrapper {
   display: flex;
-   max-width: 20%;
+   min-width: 20%;
   align-items: center;
   gap: 8px;
 }
-#progress-track {
+.progress-track {
   flex: 1;
   height: 6px;
   background: #F2F0F6;
@@ -23,4 +27,22 @@ margin-top:20;
   background: #7056E8;
   border-radius: 5px;
   transition: width 0.3s ease;
+}
+
+.title{
+    font-size:1.8rem;
+    font-weight: 600;
+    color: #201362;
+}
+
+#q-icon {
+    background-color: #7056E8;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:white;
+    font-size: 2rem;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 10px 15px;
+    box-shadow: 0px 10px 20px -5px rgba(105, 105, 105, 0.60);
+    border-radius: 20px;
 }
