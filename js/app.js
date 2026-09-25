@@ -8,11 +8,13 @@ const scoreDisplay = document.getElementById("score");
 const endOfQuiz = document.getElementById("end-of-questions")
 
 
+
 const quizState = {
    currentQuestionIndex: 0,
    scoreCount: 0,
    isQuizOver: false,
 }
+
 
 // Next Button setup
 const nextButton = document.createElement('button');
