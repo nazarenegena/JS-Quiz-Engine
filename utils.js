@@ -2,16 +2,23 @@ const correctAnswers = [];
 const wrongAnswers = [];
 
 export function displayQuestion(questions, quizBox, quizState, nextButton) {
+
+
   quizBox.innerHTML = "";
   const question = questions[quizState.currentQuestionIndex];
   const questionDiv = document.createElement("div");
   const questionCategory = document.createElement("p");
-  const questionDifficulty = document.createElement("p");
+  const questionDifficulty = document.querySelector(".question-difficulty");
+  questionDifficulty.classList.remove("difficulty-easy", "difficulty-medium", "difficulty-hard");
+  questionDifficulty.classList.add("difficulty-" + question.difficulty);
+  questionDifficulty.textContent = question.difficulty;
   const questionText = document.createElement("p");
   const choicesDiv = document.createElement("div");
   choicesDiv.className = "choices";
 
   question?.options.forEach((option) => {
+    const questionNumber = document.querySelector(".question-number")
+    questionNumber.textContent = `QUESTION ${question.id}`
     const btn = document.createElement("button");
     btn.className = "choice";
     btn.textContent = option;
@@ -21,26 +28,24 @@ export function displayQuestion(questions, quizBox, quizState, nextButton) {
 
   function handleChoiceClick(e) {
     if (quizState.isQuizOver) return;
+    if (question.isAnswered) return;
+    question.selectedAns = e.target.textContent;
     if (question.answer === e.target.textContent) {
-      if (!question.isAnswered) {
-        quizState.scoreCount += 1;
-        question.isAnswered = true;
-      }
-      question.selectedAns = e.target.textContent
+      quizState.scoreCount += 1;
       correctAnswers.push(question);
     } else {
-      question.selectedAns = e.target.textContent
       wrongAnswers.push(question);
     }
+    question.isAnswered = true;
     nextButton.style.display = "block";
   }
+
+
   questionCategory.textContent = question.category;
-  questionDifficulty.textContent = question.difficulty;
   questionText.textContent = question.question;
   quizBox.appendChild(questionDiv);
   questionDiv.setAttribute("id", question.id);
   questionDiv.appendChild(questionCategory);
-  questionDiv.appendChild(questionDifficulty);
   questionDiv.appendChild(questionText);
   questionDiv.appendChild(choicesDiv);
 }
@@ -114,6 +119,8 @@ function handleRestartButtonClick(
   scoreDisplay,
   endOfQuiz,
 ) {
+  correctAnswers.length = 0;
+  wrongAnswers.length = 0;
   questions.forEach((questionItem) => {
     quizBox.innerHTML = "";
     endOfQuiz.innerHTML = "";
@@ -121,6 +128,7 @@ function handleRestartButtonClick(
     quizState.scoreCount = 0;
     quizState.isQuizOver = false;
     questionItem.isAnswered = false;
+    questionItem.selectedAns = null;
     scoreDisplay.textContent = "";
     nextButton.style.display = "none";
   });
