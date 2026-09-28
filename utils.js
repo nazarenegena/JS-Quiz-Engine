@@ -7,12 +7,15 @@ export function displayQuestion(questions, quizBox, quizState, nextButton) {
   quizBox.innerHTML = "";
   const question = questions[quizState.currentQuestionIndex];
   const questionDiv = document.createElement("div");
+  questionDiv. className = "question-div";
   const questionCategory = document.createElement("p");
+  questionCategory.className = 'question-category'
   const questionDifficulty = document.querySelector(".question-difficulty");
   questionDifficulty.classList.remove("difficulty-easy", "difficulty-medium", "difficulty-hard");
   questionDifficulty.classList.add("difficulty-" + question.difficulty);
   questionDifficulty.textContent = question.difficulty;
   const questionText = document.createElement("p");
+  questionText.className = "question-text"
   const choicesDiv = document.createElement("div");
   choicesDiv.className = "choices";
 
@@ -173,5 +176,5 @@ export function updateProgress(quizState, questions) {
   const fill = document.getElementById("progress-fill");
   const text = document.getElementById("quizProgressText");
   if (fill) fill.style.width = percent + "%";
-  if (text) text.textContent = String(current).padStart(2, "0") + " / " + total;  // "01 / 21"
+  if (text) text.textContent = String(current).padStart(2, "0") + " / " + total;
 }
