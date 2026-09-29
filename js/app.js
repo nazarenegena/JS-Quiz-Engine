@@ -1,26 +1,29 @@
 import { displayQuestion, handleNextButtonClick, updateProgress } from "../utils.js";
 import { questions } from "./questions.js";
 
-// The DOM Elements
-const quizBox = document.getElementById("all-questions");
-const answerContainer = document.querySelector(".answer-container")
-const scoreDisplay = document.getElementById("score");
-const endOfQuiz = document.getElementById("end-of-questions")
-
-
+const deps = {
+  quizBox: document.getElementById("all-questions"),
+  nextButton: document.getElementById("next-button"),
+  scoreDisplay: document.getElementById("score"),
+  endOfQuiz: document.getElementById("end-of-questions"),
+  questionNumber: document.querySelector(".question-number"),
+  questionDifficulty: document.querySelector(".question-difficulty"),
+  progressFill: document.getElementById("progress-fill"),
+  progressStart: document.querySelector(".progress-start"),
+  progressEnd: document.getElementById("progress-end"),
+};
 
 const quizState = {
-   currentQuestionIndex: 0,
-   scoreCount: 0,
-   isQuizOver: false,
-}
+  currentQuestionIndex: 0,
+  scoreCount: 0,
+  isQuizOver: false,
+  correctAnswers: [],
+  wrongAnswers: [],
+};
 
+deps.nextButton.addEventListener("click", () => {
+  handleNextButtonClick(quizState, questions, deps);
+});
 
-// Next Button setup
-const nextButton = document.createElement('button');
-nextButton.textContent = "Next Question"
-nextButton.addEventListener('click', ()=> {handleNextButtonClick(quizState, questions, quizBox, nextButton, scoreDisplay, endOfQuiz)});
-nextButton.style.display = "none"
-answerContainer.appendChild(nextButton)
-displayQuestion(questions, quizBox, quizState, nextButton)
-updateProgress(quizState, questions);
+displayQuestion(quizState, questions, deps);
+updateProgress(quizState, questions, deps);
