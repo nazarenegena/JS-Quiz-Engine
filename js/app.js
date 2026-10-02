@@ -4,6 +4,7 @@ import { questions } from "./questions.js";
 const deps = {
   quizBox: document.getElementById("all-questions"),
   nextButton: document.getElementById("next-button"),
+  finishButton: document.getElementById("finish-button"),
   scoreDisplay: document.getElementById("score"),
   endOfQuiz: document.getElementById("end-of-questions"),
   questionNumber: document.querySelector(".question-number"),
@@ -22,6 +23,10 @@ const quizState = {
 };
 
 deps.nextButton.addEventListener("click", () => {
+  handleNextButtonClick(quizState, questions, deps);
+});
+
+deps.finishButton.addEventListener("click", () => {
   handleNextButtonClick(quizState, questions, deps);
 });
 
