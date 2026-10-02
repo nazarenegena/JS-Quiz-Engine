@@ -1,5 +1,5 @@
 export function displayQuestion(quizState, questions, deps) {
-  const { quizBox, nextButton, questionNumber, questionDifficulty } = deps;
+  const { quizBox, nextButton, finishButton, questionNumber, questionDifficulty } = deps;
   quizBox.innerHTML = "";
 
   const question = questions[quizState.currentQuestionIndex];
@@ -29,9 +29,18 @@ export function displayQuestion(quizState, questions, deps) {
   question.options.forEach((option) => {
     const btn = document.createElement("button");
     btn.className = "choice";
+    const btnInfo = document.createElement("p")
+    btnInfo.className = "btnInfo"
+
+    const keyElement = document.createElement("span")
     const key = Object.keys(option)[0];
+    keyElement.className = "choiceKeyElement";
+    keyElement.textContent = key;
+
+    const valueElement = document.createElement("span")
+    valueElement.className="choiceValueElement"
     const value = option[key];
-    btn.textContent = `${key} ${value}`;
+    valueElement.textContent = value;
     btn.value = value;
 
     const checkIcon = document.createElement("span");
@@ -39,8 +48,13 @@ export function displayQuestion(quizState, questions, deps) {
     checkIcon.style.display = "none";
     const iconEl = document.createElement("i");
     iconEl.classList.add("fa-solid", "fa-check");
-    checkIcon.appendChild(iconEl);
 
+
+
+    checkIcon.appendChild(iconEl);
+    btnInfo.appendChild(keyElement)
+    btnInfo.appendChild(valueElement)
+    btn.appendChild(btnInfo)
     btn.appendChild(checkIcon);
     btn.addEventListener("click", () => handleChoiceClick(btn, checkIcon));
     choicesDiv.appendChild(btn);
@@ -53,17 +67,20 @@ export function displayQuestion(quizState, questions, deps) {
 
   function handleChoiceClick(clickedBtn, checkIcon) {
     if (quizState.isQuizOver) return;
-
+    if (quizState.currentQuestionIndex === questions.length - 1) {
+      nextButton.style.display = "none";
+  finishButton.style.display = "block"
+    }else  nextButton.style.display = "block";
     choicesDiv.querySelectorAll(".choice").forEach((b) => {
       const icon = b.querySelector(".check-icon");
       if (icon) icon.style.display = "none";
       b.classList.remove("selected");
     });
 
-    clickedBtn.classList.add("selected");
-    checkIcon.style.display = "inline";
+
+    checkIcon.style.display = "flex";
     question.selectedAns = clickedBtn.value;
-    nextButton.style.display = "block";
+
   }
 }
 
@@ -86,17 +103,24 @@ export function handleNextButtonClick(quizState, questions, deps) {
     displayQuestion(quizState, questions, deps);
     updateProgress(quizState, questions, deps);
     deps.nextButton.style.display = "none";
-  } else {
+    deps.finishButton.style.display = "none";
+
+  }
+  else {
     renderEndScreen(quizState, questions, deps);
   }
 }
 
 function renderEndScreen(quizState, questions, deps) {
-  const { quizBox, nextButton, scoreDisplay, endOfQuiz } = deps;
+  const { quizBox, nextButton, finishButton, scoreDisplay, endOfQuiz, questionNumber, questionDifficulty} = deps;
   quizState.isQuizOver = true;
   scoreDisplay.textContent = `Your score is ${quizState.scoreCount}`;
+  questionNumber.innerHTML = ""
+  questionDifficulty.innerHTML = ""
+  questionDifficulty.classList.remove("difficulty-easy", "difficulty-medium", "difficulty-hard");
   endOfQuiz.innerHTML = "";
   quizBox.innerHTML = "";
+
 
   const endQuizParagraph = document.createElement("p");
   endQuizParagraph.textContent = "Yay! You have reached the end of Quizie Engine";
@@ -120,18 +144,18 @@ function renderEndScreen(quizState, questions, deps) {
   });
 
   endOfQuiz.append(endQuizParagraph, restartButton, correctAnswersBtn, wrongAnswersBtn);
-  nextButton.style.display = "none";
+  finishButton.style.display = "none"
 }
 
 function handleRestartButtonClick(quizState, questions, deps) {
-  const { quizBox, nextButton, scoreDisplay, endOfQuiz } = deps;
+  const { quizBox, nextButton, finishButton, scoreDisplay, endOfQuiz } = deps;
   quizState.currentQuestionIndex = 0;
   quizState.scoreCount = 0;
   quizState.isQuizOver = false;
   quizState.correctAnswers.length = 0;
   quizState.wrongAnswers.length = 0;
   scoreDisplay.textContent = "";
-  nextButton.style.display = "none";
+  finishButton.style.display = "none";
   quizBox.innerHTML = "";
   endOfQuiz.innerHTML = "";
 
