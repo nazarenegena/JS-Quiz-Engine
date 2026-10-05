@@ -1,3 +1,6 @@
+import { renderEndScreen } from "./js/app";
+
+
 export function displayQuestion(quizState, questions, deps) {
   const { quizBox, nextButton, finishButton, questionNumber, questionDifficulty } = deps;
   quizBox.innerHTML = "";
@@ -97,7 +100,6 @@ function lockAnswer(question, quizState) {
 
 export function handleNextButtonClick(quizState, questions, deps) {
   lockAnswer(questions[quizState.currentQuestionIndex], quizState);
-
   if (quizState.currentQuestionIndex < questions.length - 1) {
     quizState.currentQuestionIndex++;
     displayQuestion(quizState, questions, deps);
@@ -109,97 +111,6 @@ export function handleNextButtonClick(quizState, questions, deps) {
   else {
     renderEndScreen(quizState, questions, deps);
   }
-}
-
-function renderEndScreen(quizState, questions, deps) {
-  const { quizBox, nextButton, finishButton, scoreDisplay, endOfQuiz, questionNumber, questionDifficulty} = deps;
-  quizState.isQuizOver = true;
-  scoreDisplay.textContent = `Your score is ${quizState.scoreCount}`;
-  questionNumber.innerHTML = ""
-  questionDifficulty.innerHTML = ""
-  questionDifficulty.classList.remove("difficulty-easy", "difficulty-medium", "difficulty-hard");
-  endOfQuiz.innerHTML = "";
-  quizBox.innerHTML = "";
-
-
-  const endQuizParagraph = document.createElement("p");
-  endQuizParagraph.textContent = "Yay! You have reached the end of Quizie Engine";
-
-  const correctAnswersBtn = document.createElement("button");
-  correctAnswersBtn.textContent = "Correct Answers";
-  correctAnswersBtn.addEventListener("click", () => {
-    handleDisplayCorrectAnswers(quizState, quizBox);
-  });
-
-  const wrongAnswersBtn = document.createElement("button");
-  wrongAnswersBtn.textContent = "Wrong Answers";
-  wrongAnswersBtn.addEventListener("click", () => {
-    handleDisplayWrongAnswers(quizState, quizBox);
-  });
-
-  const restartButton = document.createElement("button");
-  restartButton.textContent = "Restart Quiz";
-  restartButton.addEventListener("click", () => {
-    handleRestartButtonClick(quizState, questions, deps);
-  });
-
-  endOfQuiz.append(endQuizParagraph, restartButton, correctAnswersBtn, wrongAnswersBtn);
-  finishButton.style.display = "none"
-}
-
-function handleRestartButtonClick(quizState, questions, deps) {
-  const { quizBox, nextButton, finishButton, scoreDisplay, endOfQuiz } = deps;
-  quizState.currentQuestionIndex = 0;
-  quizState.scoreCount = 0;
-  quizState.isQuizOver = false;
-  quizState.correctAnswers.length = 0;
-  quizState.wrongAnswers.length = 0;
-  scoreDisplay.textContent = "";
-  finishButton.style.display = "none";
-  quizBox.innerHTML = "";
-  endOfQuiz.innerHTML = "";
-
-  questions.forEach((questionItem) => {
-    questionItem.isAnswered = false;
-    questionItem.selectedAns = "";
-  });
-
-  displayQuestion(quizState, questions, deps);
-  updateProgress(quizState, questions, deps);
-}
-
-function handleDisplayCorrectAnswers(quizState, quizBox) {
-  quizBox.innerHTML = "";
-
-  const correctAnsTtitle = document.createElement("h5");
-  correctAnsTtitle.textContent = "Answers you got right";
-  quizBox.appendChild(correctAnsTtitle);
-
-  quizState.correctAnswers.forEach((correctAnswer) => {
-    const correctAnsDiv = document.createElement("div");
-    correctAnsDiv.setAttribute("id", correctAnswer.id);
-    const correctAnsQuiz = document.createElement("p");
-    correctAnsQuiz.textContent = correctAnswer.question;
-    correctAnsDiv.appendChild(correctAnsQuiz);
-    quizBox.appendChild(correctAnsDiv);
-  });
-}
-
-function handleDisplayWrongAnswers(quizState, quizBox) {
-  quizBox.innerHTML = "";
-
-  const wrongAnsTtitle = document.createElement("h5");
-  wrongAnsTtitle.textContent = "Answers you got wrong";
-  quizBox.appendChild(wrongAnsTtitle);
-
-  quizState.wrongAnswers.forEach((wrongAnswer) => {
-    const wrongAnsDiv = document.createElement("div");
-    wrongAnsDiv.setAttribute("id", wrongAnswer.id);
-    const wrongAnsQuiz = document.createElement("p");
-    wrongAnsQuiz.textContent = wrongAnswer.question;
-    wrongAnsDiv.appendChild(wrongAnsQuiz);
-    quizBox.appendChild(wrongAnsDiv);
-  });
 }
 
 export function updateProgress(quizState, questions, deps) {
