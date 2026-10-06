@@ -114,11 +114,14 @@ export function handleNextButtonClick(quizState, questions, deps) {
 }
 
 export function updateProgress(quizState, questions, deps) {
-  const current = quizState.currentQuestionIndex + 1;
-  const total = questions.length;
-  const percent = (current / total) * 100;
 
-  deps.progressFill.style.width = percent + "%";
-  deps.progressStart.textContent = String(current).padStart(2, "0");
-  deps.progressEnd.textContent = String(total).padStart(2, "0");
+
+    const current = quizState.currentQuestionIndex + 1;
+    const total = questions.length;
+    const percent = (current / total) * 100;
+    deps.progressFill.style.width = percent + "%";
+    deps.progressStart.textContent = String(current).padStart(2, "0");
+    deps.progressEnd.textContent = String(total).padStart(2, "0");
+
+
 }
