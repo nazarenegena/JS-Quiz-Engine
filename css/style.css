@@ -202,20 +202,22 @@ background-color: #7056E8;
 }
 
 .scoreDiv {
-    background-color: plum;
-padding: 1rem 2rem;
+display: flex;
+flex-direction: column;
+gap: 2.5rem;
 }
 
 .scoreTitle {
+    text-align: center;
     color:#7f7c8a;
 }
 
-.scoreDisplayDiv {
-    padding: 2.5rem 1rem;
+.scoreDisplay{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2.5rem 2rem;
     background-color: #211E32;
-
-}
-
-.scoreDisplay {
-    color: #9e9aad;
+    color: #fff;
+    border-radius: 10px;
 }

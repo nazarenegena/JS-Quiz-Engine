@@ -5,10 +5,12 @@ const deps = {
   quizBox: document.getElementById("all-questions"),
   nextButton: document.getElementById("next-button"),
   finishButton: document.getElementById("finish-button"),
-  scoreDisplay: document.getElementById("score"),
+  restartButton: document.getElementById("restart-button"),
+  score: document.getElementById("score"),
   endOfQuiz: document.querySelector(".end-of-questions"),
   questionNumber: document.querySelector(".question-number"),
   questionDifficulty: document.querySelector(".question-difficulty"),
+  progressWrapper: document.querySelector(".progress-wrapper"),
   progressFill: document.getElementById("progress-fill"),
   progressStart: document.querySelector(".progress-start"),
   progressEnd: document.getElementById("progress-end"),
@@ -35,7 +37,7 @@ updateProgress(quizState, questions, deps);
 
 
 export function renderEndScreen(quizState, questions, deps) {
-  const { quizBox, finishButton, scoreDisplay, endOfQuiz, questionNumber, questionDifficulty} = deps;
+  const { quizBox, finishButton, score, endOfQuiz, questionNumber, questionDifficulty} = deps;
   quizState.isQuizOver = true;
 
   questionNumber.innerHTML = ""
@@ -58,13 +60,15 @@ export function renderEndScreen(quizState, questions, deps) {
   scoreTitle.textContent = "Here's how you did on this round";
   scoreTitle.className="scoreTitle"
 
-  scoreDisplay.textContent = `Your score is ${quizState.scoreCount}`;
+  const scoreDisplay = document.createElement("div");
   scoreDisplay.className = "scoreDisplay"
-
+  const scoreGraph = document.createElement("p")
+  scoreGraph.textContent = "score graph"
+  score.textContent = `Your score is ${quizState.scoreCount}`;
   const scoreDiv = document.createElement("div");
   scoreDiv.className = "scoreDiv"
-  scoreDiv.appendChild(scoreTitle)
-  scoreDiv.appendChild(scoreDisplay)
+  scoreDisplay.append(score, scoreGraph)
+  scoreDiv.append(scoreTitle, scoreDisplay)
 
   const correctAnswersBtn = document.createElement("button");
   correctAnswersBtn.textContent = "Correct Answers";
@@ -78,13 +82,14 @@ export function renderEndScreen(quizState, questions, deps) {
     handleDisplayWrongAnswers(quizState, quizBox);
   });
 
-  const restartButton = document.createElement("button");
-  restartButton.textContent = "Restart Quiz";
-  restartButton.addEventListener("click", () => {
+
+
+  deps.restartButton.addEventListener("click", () => {
     handleRestartButtonClick(quizState, questions, deps);
   });
-
-  endOfQuiz.append(endQuizSubTitle, endOfQuizDescription, scoreDiv, restartButton, correctAnswersBtn, wrongAnswersBtn, );
+  deps.restartButton.style.display="block"
+deps.progressWrapper.style.display = "none"
+  endOfQuiz.append( endQuizSubTitle, endOfQuizDescription, scoreDiv, correctAnswersBtn, wrongAnswersBtn, );
   finishButton.style.display = "none"
 }
 
@@ -92,7 +97,7 @@ export function renderEndScreen(quizState, questions, deps) {
 export function handleDisplayCorrectAnswers(quizState, quizBox) {
   quizBox.innerHTML = "";
 
-  const correctAnsTtitle = document.createElement("h5");
+  const correctAnsTtitle = document.createElement("p");
   correctAnsTtitle.textContent = "Answers you got right";
   quizBox.appendChild(correctAnsTtitle);
 
@@ -107,13 +112,13 @@ export function handleDisplayCorrectAnswers(quizState, quizBox) {
 }
 
 function handleRestartButtonClick(quizState, questions, deps) {
-  const { quizBox, finishButton, scoreDisplay, endOfQuiz } = deps;
+  const { quizBox, finishButton, score, endOfQuiz } = deps;
   quizState.currentQuestionIndex = 0;
   quizState.scoreCount = 0;
   quizState.isQuizOver = false;
   quizState.correctAnswers.length = 0;
   quizState.wrongAnswers.length = 0;
-  scoreDisplay.textContent = "";
+  score.textContent = "";
   finishButton.style.display = "none";
   quizBox.innerHTML = "";
   endOfQuiz.innerHTML = "";
@@ -122,9 +127,11 @@ function handleRestartButtonClick(quizState, questions, deps) {
     questionItem.isAnswered = false;
     questionItem.selectedAns = "";
   });
-
+  deps.restartButton.style.display="none"
+  deps.progressWrapper.style.display = "flex"
   displayQuestion(quizState, questions, deps);
   updateProgress(quizState, questions, deps);
+
 }
 
 export function handleDisplayWrongAnswers(quizState, quizBox) {
