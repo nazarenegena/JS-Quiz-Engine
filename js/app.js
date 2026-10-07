@@ -14,6 +14,7 @@ const deps = {
   progressFill: document.getElementById("progress-fill"),
   progressStart: document.querySelector(".progress-start"),
   progressEnd: document.getElementById("progress-end"),
+  answerReview: document.querySelector(".answer-review")
 };
 
 const quizState = {
@@ -37,7 +38,7 @@ updateProgress(quizState, questions, deps);
 
 
 export function renderEndScreen(quizState, questions, deps) {
-  const { quizBox, finishButton, score, endOfQuiz, questionNumber, questionDifficulty} = deps;
+  const { quizBox, finishButton, score, endOfQuiz, questionNumber, questionDifficulty, answerReview} = deps;
   quizState.isQuizOver = true;
 
   questionNumber.innerHTML = ""
@@ -70,17 +71,26 @@ export function renderEndScreen(quizState, questions, deps) {
   scoreDisplay.append(score, scoreGraph)
   scoreDiv.append(scoreTitle, scoreDisplay)
 
+
+
+  // Answer section
+
+  const answerReviewTitle = document.createElement('p')
+  answerReviewTitle.textContent = "See what you know"
+answerReviewTitle.className = "answerReviewTitle"
+  answerReview.appendChild(answerReviewTitle)
+
   const correctAnswersBtn = document.createElement("button");
-  correctAnswersBtn.textContent = "Correct Answers";
+  correctAnswersBtn.textContent = "View Correct Answers";
   correctAnswersBtn.addEventListener("click", () => {
-    handleDisplayCorrectAnswers(quizState, quizBox);
-  });
+    handleDisplayCorrectAnswers(quizState, quizBox, deps);
+  }, {once:true});
 
   const wrongAnswersBtn = document.createElement("button");
-  wrongAnswersBtn.textContent = "Wrong Answers";
+  wrongAnswersBtn.textContent = "View Wrong Answers";
   wrongAnswersBtn.addEventListener("click", () => {
-    handleDisplayWrongAnswers(quizState, quizBox);
-  });
+    handleDisplayWrongAnswers(quizState, quizBox, deps);
+  }, { once: true });
 
 
 
@@ -91,15 +101,19 @@ export function renderEndScreen(quizState, questions, deps) {
 deps.progressWrapper.style.display = "none"
   endOfQuiz.append( endQuizSubTitle, endOfQuizDescription, scoreDiv, correctAnswersBtn, wrongAnswersBtn, );
   finishButton.style.display = "none"
+
+
+
 }
 
 
-export function handleDisplayCorrectAnswers(quizState, quizBox) {
+export function handleDisplayCorrectAnswers(quizState, quizBox, deps) {
+  const { endOfQuiz } = deps
   quizBox.innerHTML = "";
 
   const correctAnsTtitle = document.createElement("p");
   correctAnsTtitle.textContent = "Answers you got right";
-  quizBox.appendChild(correctAnsTtitle);
+  endOfQuiz.appendChild(correctAnsTtitle);
 
   quizState.correctAnswers.forEach((correctAnswer) => {
     const correctAnsDiv = document.createElement("div");
@@ -107,9 +121,28 @@ export function handleDisplayCorrectAnswers(quizState, quizBox) {
     const correctAnsQuiz = document.createElement("p");
     correctAnsQuiz.textContent = correctAnswer.question;
     correctAnsDiv.appendChild(correctAnsQuiz);
-    quizBox.appendChild(correctAnsDiv);
+    endOfQuiz.appendChild(correctAnsDiv);
   });
 }
+
+export function handleDisplayWrongAnswers(quizState, quizBox, deps) {
+  quizBox.innerHTML = "";
+  const { endOfQuiz } = deps
+
+  const wrongAnsTtitle = document.createElement("p");
+  wrongAnsTtitle.textContent = "Answers you got wrong";
+  endOfQuiz.appendChild(wrongAnsTtitle);
+
+  quizState.wrongAnswers.forEach((wrongAnswer) => {
+    const wrongAnsDiv = document.createElement("div");
+    wrongAnsDiv.setAttribute("id", wrongAnswer.id);
+    const wrongAnsQuiz = document.createElement("p");
+    wrongAnsQuiz.textContent = wrongAnswer.question;
+    wrongAnsDiv.appendChild(wrongAnsQuiz);
+    endOfQuiz.appendChild(wrongAnsDiv);
+  });
+}
+
 
 function handleRestartButtonClick(quizState, questions, deps) {
   const { quizBox, finishButton, score, endOfQuiz } = deps;
@@ -132,21 +165,4 @@ function handleRestartButtonClick(quizState, questions, deps) {
   displayQuestion(quizState, questions, deps);
   updateProgress(quizState, questions, deps);
 
-}
-
-export function handleDisplayWrongAnswers(quizState, quizBox) {
-  quizBox.innerHTML = "";
-
-  const wrongAnsTtitle = document.createElement("h5");
-  wrongAnsTtitle.textContent = "Answers you got wrong";
-  quizBox.appendChild(wrongAnsTtitle);
-
-  quizState.wrongAnswers.forEach((wrongAnswer) => {
-    const wrongAnsDiv = document.createElement("div");
-    wrongAnsDiv.setAttribute("id", wrongAnswer.id);
-    const wrongAnsQuiz = document.createElement("p");
-    wrongAnsQuiz.textContent = wrongAnswer.question;
-    wrongAnsDiv.appendChild(wrongAnsQuiz);
-    quizBox.appendChild(wrongAnsDiv);
-  });
 }
